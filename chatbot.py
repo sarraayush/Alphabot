@@ -3,6 +3,7 @@ import cohere
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
+import datasets
 import umap
 # import altair as alt
 from chatterbot import ChatBot
@@ -17,6 +18,8 @@ api_key = 'iBAdfWjnHxBfG5fr4jpVfVkYYxLssmxglN8s2Oc3'
 # co = cohere.Client(api_key=api_key)
 co = cohere.Client(api_key)
 
+dataset = load_dataset("trec", split="train")            #just for testing purpose
+df = pd.DataFrame(dataset)[:500]
 embeds = co.embed(texts=list(df['text']),
                   model='large',
                   truncate='LEFT').embeddings
