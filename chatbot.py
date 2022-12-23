@@ -1,13 +1,21 @@
 import streamlit as st
 import cohere 
+import numpy as np
+import pandas as pd
+from tqdm import tqdm
+import umap
+# import altair as alt
 from chatterbot import ChatBot
+from annoy import AnnoyIndex
 from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
-
+import warnings
+warnings.filterwarnings('ignore')
 # initialize the Cohere Client with an API Key
-api_key = st.text_input("Enter your API key", value="", type="password")
-
-co = cohere.Client(api_key=api_key)
+# api_key = st.text_input("Enter your API key", value="", type="password")
+api_key = 'iBAdfWjnHxBfG5fr4jpVfVkYYxLssmxglN8s2Oc3'
+# co = cohere.Client(api_key=api_key)
+co = cohere.Client(api_key)
 
 embeds = co.embed(texts=list(df['text']),
                   model='large',
